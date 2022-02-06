@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 
 import App from "./App";
 import { createStore } from "./app/store";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 test("render App", () => {
   render(
