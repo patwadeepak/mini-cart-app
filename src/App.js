@@ -1,58 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Header from "./features/header/Header";
+import MiniCart from "./features/miniCart/MiniCart";
+import ProductList from "./features/productList/ProductList";
+import { getProducts } from "./features/productList/productListSlice";
+import { setMiniCartShow } from "./features/miniCart/miniCartSlice";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // get products from provided API Url on App load
+    dispatch(getProducts());
+
+    // reset miniCart to closed state after page refresh
+    dispatch(setMiniCartShow({ show: false }));
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="App" role="application">
+      <Header />
+      <MiniCart />
+      <ProductList />
     </div>
   );
-}
+};
 
 export default App;
+
+/*
+
+0. Test Converage
+2. Set Colors, animations, hover, focus, active etc...
+3. Put Comments
+4. Remove miniCart slice and use only products slice
+4.1 Make components resusable also, 
+    if possible like make counter increment, decrement as props.
+    if possible make a List component that replaces ProductList and miniCartPopover
+4.3 Reduce popOver width, since so much space is left in middle empty
+4.4 row(not(nthlast child)) use it put bottom border for minicartItems
+4.5 put a horizontal separator line at the end of miniCart list as in techgig
+5. Push Code to github and host it also
+6. Prepare PPT and submit it
+7. Prepare Video and submit it
+8. Zip and submit it
+
+9. Update Resume
+10. Update Your Website
+11. Deploy Resume site
+
+*/

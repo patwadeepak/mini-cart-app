@@ -1,5 +1,5 @@
-.App {
+.productListContainer {
+  width: 450px;
   display: grid;
   place-items: center;
-  color: #4c6f7d;
 }

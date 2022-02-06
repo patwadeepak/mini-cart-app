@@ -1,0 +1,8 @@
+.upArrow {
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: calc(2 * 9px * 0.866) solid #b2d4dc;
+  border-top: 9px solid transparent;
+  display: inline-block;
+  transform: translate(22rem, 0.25rem);
+}

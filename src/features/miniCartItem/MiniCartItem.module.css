@@ -1,0 +1,54 @@
+.miniCartItemContainer {
+  display: flex;
+  width: 400px;
+  padding: 15px;
+  background-color: #b2d4dc;
+  border-bottom: 2px solid #a4c5cd;
+}
+
+.miniCartItemContainer > * {
+  display: inline-block;
+}
+
+.closeIcon {
+  place-items: center;
+  margin-right: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3rem;
+  align-self: center;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.closeIcon:hover {
+  color: #4c6f7d;
+}
+
+.closeIcon:active {
+  opacity: 0.65;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.quantity {
+  text-align: end;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.titleAndPrice {
+  flex-grow: 1;
+  align-self: center;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}

@@ -1,0 +1,69 @@
+.headerContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+  background-color: #faf9ff;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3rem;
+  grid-template-rows: 1fr 1rem;
+  gap: 0px 0px;
+  grid-auto-flow: column;
+  grid-template-areas:
+    "TotalAmount Icon"
+    "ItemCount Icon";
+
+  font-weight: 600;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.totalAmount {
+  grid-area: TotalAmount;
+  font-size: 1.1rem;
+  text-align: right;
+  overflow: visible;
+  transform: translateX(-0.3rem);
+}
+
+.itemCount {
+  grid-area: ItemCount;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.iconContainer {
+  grid-area: Icon;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+}
+
+.icon {
+  width: 100%;
+}
+
+.headerContainerAfter {
+  width: 500px;
+  height: 5px;
+  background-color: #e2e1e5;
+}
+
+.downArrowContainer {
+  width: 10px;
+  height: 10px;
+}
+
+.downArrow {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid black;
+  display: inline-block;
+  margin: 4px;
+  transform: translateY(5px);
+}
