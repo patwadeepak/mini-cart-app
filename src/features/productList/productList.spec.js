@@ -43,8 +43,24 @@ test("product list render with 2 products with icons, counter, title, desc and p
   const state = {
     miniCart: {
       cart: [
-        { id: "123442", quantity: 22 },
-        { id: "123443", quantity: 1 },
+        {
+          id: "123442",
+          title: "Product 1",
+          desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          image: "/product1.jpeg",
+          price: "39",
+          currency: "$",
+          quantity: 22,
+        },
+        {
+          id: "123443",
+          title: "Product 2",
+          desc: "Awesome product 2 description",
+          image: "/product2.jpeg",
+          price: "40",
+          currency: "$",
+          quantity: 1,
+        },
       ],
       show: false,
     },
@@ -70,7 +86,7 @@ test("product list render with 2 products with icons, counter, title, desc and p
   const description1 = screen.getByText(products[0].desc);
   expect(description1).toBeInTheDocument();
 
-  const quantity1 = screen.queryByDisplayValue("22");
+  const quantity1 = screen.getByText("22");
   expect(quantity1).toBeInTheDocument();
 
   // product 2
@@ -83,7 +99,7 @@ test("product list render with 2 products with icons, counter, title, desc and p
   const description2 = screen.getByText(products[1].desc);
   expect(description2).toBeInTheDocument();
 
-  const quantity2 = screen.queryByDisplayValue("1");
+  const quantity2 = screen.getByText("1");
   expect(quantity2).toBeInTheDocument();
 });
 
@@ -91,8 +107,24 @@ test("render product list with 2 items. Test decrement/increment of item quantit
   const state = {
     miniCart: {
       cart: [
-        { id: "123442", quantity: 17 },
-        { id: "123443", quantity: 1 },
+        {
+          id: "123442",
+          title: "Product 1",
+          desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          image: "/product1.jpeg",
+          price: "39",
+          currency: "$",
+          quantity: 17,
+        },
+        {
+          id: "123443",
+          title: "Product 2",
+          desc: "Awesome product 2 description",
+          image: "/product2.jpeg",
+          price: "40",
+          currency: "$",
+          quantity: 3,
+        },
       ],
       show: false,
     },
@@ -108,53 +140,22 @@ test("render product list with 2 items. Test decrement/increment of item quantit
   );
 
   // decrement the item quantity by 1 clicking on - button
-  const decrementButton = screen.getAllByText(/-/i);
+  const decrementButton = screen.getAllByLabelText("Decrement value");
   fireEvent.click(decrementButton[0]);
 
-  const quantity1 = screen.queryByDisplayValue("17");
-  expect(quantity1).not.toBeInTheDocument();
-
-  const quantity2 = screen.queryByDisplayValue("16");
-  expect(quantity2).toBeInTheDocument();
-
-  // increment the item quantity by 1 clicking on + button
-  const incrementButton = screen.getAllByText(/\+/i);
-  fireEvent.click(incrementButton[1]);
-
-  const quantity3 = screen.queryByDisplayValue("1");
-  expect(quantity3).not.toBeInTheDocument();
-
-  const quantity4 = screen.queryByDisplayValue("2");
-  expect(quantity4).toBeInTheDocument();
-});
-
-test("render product list with 2 items. Test decrement/increment of item quantity", () => {
-  const state = {
-    miniCart: {
-      cart: [
-        { id: "123442", quantity: 63 },
-        { id: "123443", quantity: 1 },
-      ],
-      show: false,
-    },
-    productList: {
-      products,
-      status: "idle",
-    },
-  };
-  render(
-    <Provider store={createStore(state)}>
-      <ProductList />
-    </Provider>
-  );
-
-  // set quantity from 63 to 44
-  const textBox = screen.queryByDisplayValue(/63/i);
-  fireEvent.change(textBox, { target: { value: "44" } });
-
-  const quantity1 = screen.queryByDisplayValue("44");
+  const quantity1 = screen.getByText("16");
   expect(quantity1).toBeInTheDocument();
 
-  const quantity2 = screen.queryByDisplayValue("63");
+  const quantity2 = screen.queryByText("17");
   expect(quantity2).not.toBeInTheDocument();
+
+  // increment the item quantity by 1 clicking on + button
+  const incrementButton = screen.getAllByLabelText("Increment value");
+  fireEvent.click(incrementButton[1]);
+
+  const quantity3 = screen.queryByText("3");
+  expect(quantity3).not.toBeInTheDocument();
+
+  const quantity4 = screen.getByText("4");
+  expect(quantity4).toBeInTheDocument();
 });

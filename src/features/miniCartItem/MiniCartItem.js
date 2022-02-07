@@ -15,8 +15,8 @@ const MiniCartItem = ({ item }) => {
     <div className={styles.miniCartItemContainer}>
       <div
         className={styles.closeIcon}
-        onClick={() => dispatch(removeItem({ id }))}
-        role="button"
+        onClick={() => dispatch(removeItem({ item }))}
+        aria-label="remove button"
       >
         <IoClose />
       </div>

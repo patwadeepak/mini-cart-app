@@ -28,7 +28,7 @@ const Header = () => {
     setTotalAmount(amount);
   }, []);
 
-  // update totalAmount when cart/products changes
+  // update totalAmount when cart changes
   useEffect(() => {
     updateTotalAmount(cart);
   }, [cart, updateTotalAmount]);

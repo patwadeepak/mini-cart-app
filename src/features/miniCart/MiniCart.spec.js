@@ -45,8 +45,24 @@ test("render miniCart with 2 items", () => {
   const state = {
     miniCart: {
       cart: [
-        { id: "123442", quantity: 32 },
-        { id: "123443", quantity: 1 },
+        {
+          id: "123442",
+          title: "Product 1",
+          desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          image: "/product1.jpeg",
+          price: "39",
+          currency: "$",
+          quantity: 32,
+        },
+        {
+          id: "123443",
+          title: "Product 2",
+          desc: "Awesome product 2 description",
+          image: "/product2.jpeg",
+          price: "40",
+          currency: "$",
+          quantity: 1,
+        },
       ],
       show: true,
     },
@@ -81,28 +97,30 @@ test("render miniCart with 2 items", () => {
 
   const quantityText2 = screen.getByText("Qty 1");
   expect(quantityText2).toBeInTheDocument();
-
-  // removing the items by clicking on X
-  const removeButton = screen.getAllByRole("button");
-  fireEvent.click(removeButton[0]);
-
-  // item 1 should be missing now
-  const productTitle3 = screen.queryByText("Product 1");
-  expect(productTitle3).not.toBeInTheDocument();
-
-  const totalAmount3 = screen.queryByText("$1248");
-  expect(totalAmount3).not.toBeInTheDocument();
-
-  const quantityText3 = screen.queryByText("Qty 32");
-  expect(quantityText3).not.toBeInTheDocument();
 });
 
 test("render miniCart with 2 items. Test removal of item 1", () => {
   const state = {
     miniCart: {
       cart: [
-        { id: "123442", quantity: 32 },
-        { id: "123443", quantity: 1 },
+        {
+          id: "123442",
+          title: "Product 1",
+          desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          image: "/product1.jpeg",
+          price: "39",
+          currency: "$",
+          quantity: 32,
+        },
+        {
+          id: "123443",
+          title: "Product 2",
+          desc: "Awesome product 2 description",
+          image: "/product2.jpeg",
+          price: "40",
+          currency: "$",
+          quantity: 1,
+        },
       ],
       show: true,
     },
@@ -118,7 +136,7 @@ test("render miniCart with 2 items. Test removal of item 1", () => {
   );
 
   // removing the items by clicking on X
-  const removeButton = screen.getAllByRole("button");
+  const removeButton = screen.getAllByLabelText("remove button");
   fireEvent.click(removeButton[0]);
 
   // item 1 should be missing now

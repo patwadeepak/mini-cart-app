@@ -15,18 +15,32 @@
   cursor: pointer;
   border-radius: 2px;
   transition: all 0.15s;
+
+  display: grid;
+  place-items: center;
 }
 
-.textbox {
+.textboxLook {
+  appearance: none;
+  background: none;
   font-size: 1rem;
-  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border-radius: 2px;
+
   width: 3rem;
-  text-align: center;
+  height: 2rem;
+  background: white;
+  border: 1px solid grey;
+
+  display: grid;
+  place-items: center;
 }
 
 .button:hover,
 .button:focus {
-  border: 2px solid rgba(112, 76, 182, 0.4);
+  border: 2px solid rgba(41, 41, 41, 0.4);
 }
 
 .button:active {

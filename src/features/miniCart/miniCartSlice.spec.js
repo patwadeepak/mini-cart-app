@@ -1,7 +1,6 @@
 import miniCartReducer, {
   incrementItemQty,
   decrementItemQty,
-  setItemQty,
   removeItem,
   toggleMiniCartShow,
   setMiniCartShow,
@@ -17,11 +16,51 @@ describe("miniCart reducer", () => {
 
   const stateWithFullCart = {
     cart: [
-      { id: "99", quantity: "56" },
-      { id: "42", quantity: "5" },
-      { id: "101", quantity: "1" },
-      { id: "9", quantity: "8" },
-      { id: "420", quantity: "0" },
+      {
+        id: "99",
+        quantity: 56,
+        title: "Product 1",
+        desc: "product 1 description",
+        image: "/product1.jpeg",
+        price: "39",
+        currency: "$",
+      },
+      {
+        id: "42",
+        quantity: 5,
+        title: "Product 2",
+        desc: "product 2 description",
+        image: "/product2.jpeg",
+        price: "39",
+        currency: "$",
+      },
+      {
+        id: "101",
+        quantity: 1,
+        title: "Product 3",
+        desc: "product 3 description",
+        image: "/product3.jpeg",
+        price: "39",
+        currency: "$",
+      },
+      {
+        id: "9",
+        quantity: 8,
+        title: "Product 4",
+        desc: "product 4 description",
+        image: "/product4.jpeg",
+        price: "39",
+        currency: "$",
+      },
+      {
+        id: "420",
+        quantity: 0,
+        title: "Product 5",
+        desc: "product 5 description",
+        image: "/product5.jpeg",
+        price: "39",
+        currency: "$",
+      },
     ],
     show: false,
   };
@@ -43,7 +82,9 @@ describe("miniCart reducer", () => {
   it("should become 57 since item id 99 is in the cart.", () => {
     const actual = miniCartReducer(
       stateWithFullCart,
-      incrementItemQty({ id: "99" })
+      incrementItemQty({
+        item: stateWithFullCart.cart.find((item) => item.id === "99"),
+      })
     );
     expect(actual.cart.find((item) => item.id === "99").quantity).toEqual(57);
   });
@@ -52,7 +93,9 @@ describe("miniCart reducer", () => {
   it("should become 4.", () => {
     const actual = miniCartReducer(
       stateWithFullCart,
-      decrementItemQty({ id: "42" })
+      decrementItemQty({
+        item: stateWithFullCart.cart.find((item) => item.id === "42"),
+      })
     );
     expect(actual.cart.find((item) => item.id === "42").quantity).toEqual(4);
   });
@@ -60,7 +103,9 @@ describe("miniCart reducer", () => {
   it("should be removed from cart", () => {
     const actual = miniCartReducer(
       stateWithFullCart,
-      decrementItemQty({ id: "101" })
+      decrementItemQty({
+        item: stateWithFullCart.cart.find((item) => item.id === "101"),
+      })
     );
     expect(actual.cart.find((item) => item.id === "101")).toBeUndefined();
   });
@@ -68,7 +113,9 @@ describe("miniCart reducer", () => {
   it("should do nothing since no item id 1234 is in cart", () => {
     const actual = miniCartReducer(
       stateWithFullCart,
-      decrementItemQty({ id: "1234" })
+      decrementItemQty({
+        item: { id: "1234" },
+      })
     );
     expect(actual).toEqual(stateWithFullCart);
   });
@@ -76,54 +123,21 @@ describe("miniCart reducer", () => {
   it("should remove the item form cart", () => {
     const actual = miniCartReducer(
       stateWithFullCart,
-      decrementItemQty({ id: "420" })
+      decrementItemQty({
+        item: stateWithFullCart.cart.find((item) => item.id === "420"),
+      })
     );
     expect(actual).toEqual(stateWithFullCart);
   });
 
-  // setItemQty
-  it("should be 50", () => {
-    const actual = miniCartReducer(
-      stateWithFullCart,
-      setItemQty({
-        id: "101",
-        quantity: "50",
-        inputType: "insertText",
-        data: "5",
-      })
-    );
-    expect(actual.cart.find((item) => item.id === "101").quantity).toEqual(50);
-  });
-
-  it("should be removed from cart", () => {
-    const actual = miniCartReducer(
-      stateWithFullCart,
-      setItemQty({
-        id: "101",
-        quantity: "",
-        inputType: "insertText",
-        data: "5",
-      })
-    );
-    expect(actual.cart.find((item) => item.id === "101")).toBeUndefined();
-  });
-
-  it("should be added to cart with given quantity", () => {
-    const actual = miniCartReducer(
-      stateWithFullCart,
-      setItemQty({
-        id: "57",
-        quantity: "29",
-        inputType: "insertText",
-        data: "5",
-      })
-    );
-    expect(actual.cart.find((item) => item.id === "57").quantity).toEqual(29);
-  });
-
   // removeItem
   it("should remove item from cart", () => {
-    const actual = miniCartReducer(stateWithFullCart, removeItem({ id: "99" }));
+    const actual = miniCartReducer(
+      stateWithFullCart,
+      removeItem({
+        item: stateWithFullCart.cart.find((item) => item.id === "99"),
+      })
+    );
     expect(actual.cart.find((item) => item.id === "99")).toBeUndefined();
   });
 
@@ -153,8 +167,24 @@ describe("miniCart reducer", () => {
       getProducts.fulfilled(products)
     );
     expect(actual.cart).toEqual([
-      { id: "123442", quantity: 1, price: "39", title: "Product 1" },
-      { id: "123443", quantity: 1, price: "40", title: "Product 2" },
+      {
+        id: "123442",
+        title: "Product 1",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        image: "/product1.jpeg",
+        price: "39",
+        currency: "$",
+        quantity: 1,
+      },
+      {
+        id: "123443",
+        title: "Product 2",
+        desc: "Awesome product 2 description",
+        image: "/product2.jpeg",
+        price: "40",
+        currency: "$",
+        quantity: 1,
+      },
     ]);
   });
 

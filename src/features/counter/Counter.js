@@ -1,47 +1,31 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Counter.module.css";
 
-import {
-  incrementItemQty,
-  decrementItemQty,
-  setItemQty,
-} from "../miniCart/miniCartSlice";
+import { incrementItemQty, decrementItemQty } from "../miniCart/miniCartSlice";
 
-const Counter = ({ id, quantity, disablePaste = true }) => {
+const Counter = ({ item, disablePaste = true }) => {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.miniCart.cart);
+  const cartItem = cart.find((currentItem) => currentItem.id === item.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
   return (
     <div>
       <div className={styles.row}>
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(decrementItemQty({ id }))}
+          onClick={() => dispatch(decrementItemQty({ item }))}
         >
           -
         </button>
-        <input
-          className={styles.textbox}
-          aria-label="Textbox to show counter value"
-          value={quantity}
-          onChange={(event) =>
-            dispatch(
-              setItemQty({
-                id,
-                quantity: event.target.value,
-                inputType: event.nativeEvent.inputType,
-                data: event.nativeEvent.data,
-              })
-            )
-          }
-          onPaste={(event) => {
-            disablePaste && event.preventDefault();
-          }}
-        />
+        <div className={styles.textboxLook} aria-label="show product quantity">
+          {quantity}
+        </div>
         <button
           className={styles.button}
           aria-label="Increment value"
-          onClick={() => dispatch(incrementItemQty({ id }))}
+          onClick={() => dispatch(incrementItemQty({ item }))}
         >
           +
         </button>
