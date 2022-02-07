@@ -87,6 +87,8 @@ export const miniCartSlice = createSlice({
             return {
               id: item.id,
               quantity: 1,
+              title: item.title,
+              price: item.price,
             };
           })
         : state.cart;

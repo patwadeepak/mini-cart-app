@@ -153,8 +153,8 @@ describe("miniCart reducer", () => {
       getProducts.fulfilled(products)
     );
     expect(actual.cart).toEqual([
-      { id: "123442", quantity: 1 },
-      { id: "123443", quantity: 1 },
+      { id: "123442", quantity: 1, price: "39", title: "Product 1" },
+      { id: "123443", quantity: 1, price: "40", title: "Product 2" },
     ]);
   });
 

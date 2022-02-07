@@ -30,8 +30,10 @@ test("get data", async () => {
 });
 
 test("get error while fetching data", async () => {
+  console.error = jest.fn();
   const response = await fetchProducts(
     "https://dnc0cmt2n557n.cloudfront.net/products.json.error"
   );
   expect(response).toBeUndefined();
+  expect(console.error).toHaveBeenCalledTimes(1);
 });

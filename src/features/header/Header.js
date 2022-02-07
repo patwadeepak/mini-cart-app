@@ -13,28 +13,25 @@ const Header = () => {
   // redux dispatch and select
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.miniCart.cart);
-  const products = useSelector((state) => state.productList.products);
 
   // memoizing function using useCallback to avoid redeclaration with every render
-  const updateTotalAmount = useCallback((cart, products) => {
+  const updateTotalAmount = useCallback((cart) => {
     let amount = 0;
-    if (cart.length === 0 || products.length === 0) {
+    if (cart.length === 0) {
       amount = 0;
+    } else {
+      amount = cart.reduce((sum, currentItem) => {
+        return sum + currentItem.price * currentItem.quantity;
+      }, 0);
     }
-
-    amount = cart.reduce((sum, currentItem) => {
-      const item = products.find((item) => item.id === currentItem.id);
-      const itemPrice = item.price;
-      return sum + itemPrice * currentItem.quantity;
-    }, 0);
 
     setTotalAmount(amount);
   }, []);
 
   // update totalAmount when cart/products changes
   useEffect(() => {
-    updateTotalAmount(cart, products);
-  }, [cart, products, updateTotalAmount]);
+    updateTotalAmount(cart);
+  }, [cart, updateTotalAmount]);
 
   // memoizing function usign useCallback to avoid redeclaration with every render
   const itemCount = useCallback((cart) => {

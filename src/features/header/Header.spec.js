@@ -19,3 +19,30 @@ test("render Header with empty cart", () => {
   const items = screen.getByText("0 Item");
   expect(items).toBeInTheDocument();
 });
+
+test("render Header with filled cart but empty product list", () => {
+  const state = {
+    miniCart: {
+      cart: [
+        { id: "123442", quantity: 20, price: "10", title: "amazing product" },
+      ],
+      show: false,
+    },
+    productList: {
+      products: [],
+      status: "idle",
+    },
+  };
+
+  render(
+    <Provider store={createStore(state)}>
+      <Header />
+    </Provider>
+  );
+
+  const totalAmount = screen.getByText("$200");
+  expect(totalAmount).toBeInTheDocument();
+
+  const items = screen.getByText("1 Item");
+  expect(items).toBeInTheDocument();
+});

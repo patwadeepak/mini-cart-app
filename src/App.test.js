@@ -12,9 +12,6 @@ test("render App", () => {
     </Provider>
   );
 
-  screen.debug();
-
-  // at first when app loads without any products and items in cart
   const app = screen.getByRole("application");
   expect(app).not.toBeEmpty();
 });
