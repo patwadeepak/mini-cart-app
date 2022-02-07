@@ -36,6 +36,5 @@
   },
   "devDependencies": {
     "msw": "^0.36.8"
-  },
-  "homepage": "https://patwadeepak.github.io/mini-cart-app/"
+  }
 }
