@@ -28,26 +28,3 @@ const App = () => {
 };
 
 export default App;
-
-/*
-
-0. Test Converage
-2. Set Colors, animations, hover, focus, active etc...
-3. Put Comments
-4. Remove miniCart slice and use only products slice
-4.1 Make components resusable also, 
-    if possible like make counter increment, decrement as props.
-    if possible make a List component that replaces ProductList and miniCartPopover
-4.3 Reduce popOver width, since so much space is left in middle empty
-4.4 row(not(nthlast child)) use it put bottom border for minicartItems
-4.5 put a horizontal separator line at the end of miniCart list as in techgig
-5. Push Code to github and host it also
-6. Prepare PPT and submit it
-7. Prepare Video and submit it
-8. Zip and submit it
-
-9. Update Resume
-10. Update Your Website
-11. Deploy Resume site
-
-*/
